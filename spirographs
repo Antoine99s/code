@@ -1,0 +1,38 @@
+#Antoine S
+#Generative art using turtles in Python
+
+import turtle
+import random
+import colorsys
+
+# Setup screen
+screen = turtle.Screen()
+screen.bgcolor("black")
+
+# Create turtle
+pen = turtle.Turtle()
+pen.speed(0)
+pen.width(2)
+pen.hideturtle()
+
+# Generate colours using HSV
+def generate_colors(n):
+    colors = []
+    for i in range(n):
+        hue = i / n
+        rgb = colorsys.hsv_to_rgb(hue, 1.0, 1.0)
+        colors.append((rgb[0], rgb[1], rgb[2]))
+    return colors
+
+# Set color mode to RGB 0-1
+screen.colormode(1.0)
+colors = generate_colors(100)
+
+# Draw spirograph-like pattern
+for i in range(360):
+    pen.color(colors[i % len(colors)])
+    pen.circle(100+i)
+    pen.right(5)
+
+# Click to exit
+screen.exitonclick()
